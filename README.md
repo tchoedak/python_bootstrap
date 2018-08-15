@@ -1,8 +1,8 @@
 # python_bootstrap
-Python Bootstrap
 
 The best way to kill a snake is to stomp it with your boot.
 
+!(http://www.pngall.com/wp-content/uploads/2016/05/Python-Logo-Free-Download-PNG.png) !(https://i.imgur.com/Dfa2VKD.png)
 
 ## Install
 To install python and have it configured with pip, virtualenv, simply run the following
