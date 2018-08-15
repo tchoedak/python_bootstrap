@@ -4,6 +4,8 @@ export VERSION=2.7.15
 export PYTHON_VERSION=Python-$VERSION # do not change this
 export PYTHON_INSTALL_DIR=$ROOT_DIR/resources/$PYTHON_VERSION
 export TEMP_DIR=$ROOT_DIR/resources/tmp
+
+# download python
 wget -N \
      --no-check-certificate\
      -O $PYTHON_INSTALL_DIR.tgz\
@@ -12,18 +14,18 @@ wget -N \
 mkdir -p $TEMP_DIR
 tar -xzf $PYTHON_INSTALL_DIR.tgz -C $TEMP_DIR
 mv $TEMP_DIR/$PYTHON_VERSION $PYTHON_INSTALL_DIR
-$PYTHON_INSTALL_DIR/configure
-$PYTHON_INSTALL_DIR/make install
-exit 0
-export PYTHONPATH=$PYTHON_INSTALL_DIR/bin/
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python get-pip.py
+# install python
+cd $PYTHON_INSTALL_DIR \
+	&& ./configure --prefix=$PYTHON_INSTALL_DIR --enable-shared \
+	&& make install
+export PATH=$PYTHON_INSTALL_DIR/bin/:$PATH
+
+# install pip
+python $ROOT_DIR/resources/get-pip.py
 pip install virtualenv
 
-## create a virtualenv
-virtualenv playground
-source playground/bin/activate
-
-## install paramiko in your venv
+# create a virtual environment
+virtualenv resources/tmp/test_env
+source resources/tmp/test_env/bin/activate
 pip install paramiko
-
+python
